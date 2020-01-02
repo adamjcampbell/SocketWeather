@@ -2,6 +2,12 @@ import UIKit
 import TinyConstraints
 
 final class ChooseLocationViewController: UIViewController {
+  enum Event {
+    case choseLocation(geoHash: GeoHash)
+  }
+
+  var eventHandler: ((Event) -> Void)?
+
   private var chooseLocationView: ChooseLocationView { view as! ChooseLocationView }
 
   override func loadView() {
@@ -9,10 +15,8 @@ final class ChooseLocationViewController: UIViewController {
   }
 
   override func viewDidLoad() {
-    chooseLocationView.collingwoodTapHandler = {
-      getObservations(geoHash: "r1r0gjr") {
-        print($0 as Any)
-      }
+    chooseLocationView.collingwoodTapHandler = { [unowned self] in
+      self.eventHandler?(.choseLocation(geoHash: "r1r0gjr"))
     }
   }
 
@@ -27,6 +31,7 @@ final class ChooseLocationViewController: UIViewController {
       let topSpace = UIView()
 
       let titleLabel = UILabel()
+      titleLabel.numberOfLines = 0
       titleLabel.text = "Where's your weather?"
       titleLabel.font = .preferredFont(forTextStyle: .largeTitle, compatibleWith: traitCollection)
 
