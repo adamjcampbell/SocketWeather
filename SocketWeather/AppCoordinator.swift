@@ -6,7 +6,7 @@ final class AppCoordinator {
   init() {}
 
   func start() {
-    window.rootViewController = ViewController()
+    window.rootViewController = ChooseLocationViewController()
     window.makeKeyAndVisible()
   }
 }
