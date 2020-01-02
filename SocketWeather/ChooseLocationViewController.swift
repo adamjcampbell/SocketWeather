@@ -10,7 +10,9 @@ final class ChooseLocationViewController: UIViewController {
 
   override func viewDidLoad() {
     chooseLocationView.collingwoodTapHandler = {
-      getObservations(geoHash: "r1r0gjr")
+      getObservations(geoHash: "r1r0gjr") {
+        print($0 as Any)
+      }
     }
   }
 
